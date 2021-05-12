@@ -38,7 +38,7 @@ if ! command -v git 1>/dev/null 2>&1; then
   exit 1
 fi
 
-PYENV_DL_TARGET=$PYENV_ROOT
+export PYENV_DL_TARGET=$PYENV_ROOT
 ${SCRIPT_DIR}/download-pyenv-package.sh
 
 if ! command -v pyenv 1>/dev/null; then
