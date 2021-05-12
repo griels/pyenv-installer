@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+export PYENV_INSTALLING="True"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 checkout() {
