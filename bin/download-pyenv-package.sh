@@ -10,11 +10,11 @@ if [ -z "$PYENV_PACKAGE_ARCHIVE" ]; then
   PYENV_PACKAGE_ARCHIVE="$(cd $(dirname "$0") && pwd)/pyenv-package.tar.gz"
 fi
 
-if [ -n "$PYENV_DL_TARGET" ]; then
+if [ -z "$PYENV_DL_TARGET" ]; then
   TMP_DIR=$(mktemp -d)
 else
   TMP_DIR=$PYENV_DL_TARGET
-
+fi
 if [ -n "${USE_HTTPS}" ]; then
   GITHUB="https://github.com"
 else
@@ -25,10 +25,10 @@ if [ -n "${PYENV_VERSION}" ]; then
   PYENV_VERSION=HEAD
 fi
 
-if [ -n "${INSTALLER_REPO}" ]; then
+if [ -z "${INSTALLER_REPO}" ]; then
   INSTALLER_REPO=`bash -c "cd ${SCRIPT_DIR} && git remote get-url origin"`
 fi
-if [ -n "${INSTALLER_REPO}" ]; then
+if [ -z "${INSTALLER_REPO}" ]; then
   INSTALLER_REPO="${GITHUB}/pyenv/pyenv-installer.git"
 fi
 # checkout to temporary directory.
@@ -39,10 +39,9 @@ checkout "${GITHUB}/pyenv/pyenv-update.git"     "$TMP_DIR"
 checkout "${GITHUB}/pyenv/pyenv-virtualenv.git" "$TMP_DIR"
 checkout "${GITHUB}/pyenv/pyenv-which-ext.git"  "$TMP_DIR"
 
-if [ -n "${PYENV_DL_TARGET}" ]; then
+if [ -z "${PYENV_DL_TARGET}" ]; then
   # create archive.
   tar -zcf "$PYENV_PACKAGE_ARCHIVE" -C "$TMP_DIR" .
   echo "Created installer archive at $PYENV_PACKAGE_ARCHIVE"
   rm -rf $TMP_DIR
 fi
-
