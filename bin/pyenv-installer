@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 set -e
 [ -n "$PYENV_DEBUG" ] && set -x
@@ -43,12 +44,8 @@ else
   GITHUB="https://github.com"
 fi
 
-checkout "${GITHUB}/pyenv/pyenv.git"            "${PYENV_ROOT}"
-checkout "${GITHUB}/pyenv/pyenv-doctor.git"     "${PYENV_ROOT}/plugins/pyenv-doctor"
-checkout "${GITHUB}/pyenv/pyenv-installer.git"  "${PYENV_ROOT}/plugins/pyenv-installer"
-checkout "${GITHUB}/pyenv/pyenv-update.git"     "${PYENV_ROOT}/plugins/pyenv-update"
-checkout "${GITHUB}/pyenv/pyenv-virtualenv.git" "${PYENV_ROOT}/plugins/pyenv-virtualenv"
-checkout "${GITHUB}/pyenv/pyenv-which-ext.git"  "${PYENV_ROOT}/plugins/pyenv-which-ext"
+PYENV_DL_TARGET=$PYENV_ROOT
+${SCRIPT_DIR}/download-pyenv-package.sh
 
 if ! command -v pyenv 1>/dev/null; then
   { echo
