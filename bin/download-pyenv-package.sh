@@ -26,10 +26,11 @@ if [ -n "${PYENV_VERSION}" ]; then
 fi
 
 if [ -z "${INSTALLER_REPO}" ]; then
-  INSTALLER_REPO=`bash -c "cd ${SCRIPT_DIR} && git remote get-url origin"`
+  INSTALLER_REPO=$(bash -c "cd ${SCRIPT_DIR} && git remote get-url origin")
 fi
 if [ -z "${INSTALLER_REPO}" ]; then
-  INSTALLER_REPO="${GITHUB}/pyenv/pyenv-installer.git"
+  source "${SCRIPT_DIR}/../pyenv.run.sh"
+  INSTALLER_REPO="${GITHUB}/${PYENV_REPO}/pyenv-installer.git"
 fi
 # checkout to temporary directory.
 checkout "${GITHUB}/pyenv/pyenv.git@${PYENV_VERSION}"            "$TMP_DIR"
