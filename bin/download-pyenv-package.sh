@@ -28,10 +28,13 @@ fi
 if [ -n "${INSTALLER_REPO}" ]; then
   INSTALLER_REPO=`bash -c "cd ${SCRIPT_DIR} && git remote get-url origin"`
 fi
+if [ -n "${INSTALLER_REPO}" ]; then
+  INSTALLER_REPO="${GITHUB}/pyenv/pyenv-installer.git"
+fi
 # checkout to temporary directory.
 checkout "${GITHUB}/pyenv/pyenv.git@${PYENV_VERSION}"            "$TMP_DIR"
 checkout "${GITHUB}/pyenv/pyenv-doctor.git"     "$TMP_DIR"
-cp -rf . "$TMP_DIR"
+checkout "${INSTALLER_REPO}"     "$TMP_DIR"
 checkout "${GITHUB}/pyenv/pyenv-update.git"     "$TMP_DIR"
 checkout "${GITHUB}/pyenv/pyenv-virtualenv.git" "$TMP_DIR"
 checkout "${GITHUB}/pyenv/pyenv-which-ext.git"  "$TMP_DIR"
