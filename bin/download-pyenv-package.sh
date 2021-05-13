@@ -22,7 +22,7 @@ else
   GITHUB="git://github.com"
 fi
 
-if [ -n "${PYENV_VERSION}" ]; then
+if [ -z "${PYENV_VERSION}" ]; then
   PYENV_VERSION=HEAD
 fi
 

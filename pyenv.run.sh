@@ -5,7 +5,7 @@
 # For more info, visit: https://raw.githubusercontent.com/pyenv/pyenv-installer
 #
 
-PYENV_REPO="griels"
+PYENV_REPO="pyenv"
 
 index_main() {
     set -e
